@@ -8,6 +8,8 @@ namespace ToDoList
 {
     public class Model
     {
+        public delegate void ChangeModel();
+        public event ChangeModel ModelChanged;
         public AppProject SelectedProject { get; set; }
         public List<AppProject> Projects { get; set; }
 

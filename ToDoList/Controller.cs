@@ -8,8 +8,6 @@ namespace ToDoList
 {
     public class Controller : IController
     {
-        public delegate void OnModelChanged();
-        public event OnModelChanged ModelChanged;
         public Model AppModel { get; set; }
 
         public Controller(Model model)
@@ -17,7 +15,7 @@ namespace ToDoList
             this.AppModel = model;
         }
 
-        public void AddProject(string name)
+        public void AddProject(string name) //AddProjectForm click OK; name = textbox content
         {
             this.AppModel.Projects.Add(new AppProject(name));
         }
@@ -36,7 +34,6 @@ namespace ToDoList
         public void CompleteTask(AppProject project, string name)
         {
             //set Task.Done = true
-            throw new NotImplementedException();
         }
     }
 }

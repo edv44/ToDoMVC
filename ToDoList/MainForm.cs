@@ -18,9 +18,8 @@ namespace ToDoList
         {
             InitializeComponent();
             this.C = C;
-            foreach (AppProject p in C.AppModel.Projects) comboBox1.Items.Add(p.Name);
-            comboBox1.SelectedItem = C.AppModel.SelectedProject.Name;
-            //foreach (AppTask t in C.AppModel.SelectedProject.Tasks) listView1.Items.Add(t.Name);
+            C.AppModel.ModelChanged += this.UpdateContent;
+            UpdateContent();
         }
 
         private void addProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -32,12 +31,21 @@ namespace ToDoList
         private void addTaskToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddTaskForm form = new AddTaskForm(C);
+            C.AppModel.ModelChanged += form.Update;
             form.ShowDialog();
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void UpdateContent()
+        {
+            comboBox1.Items.Clear();
+            foreach (AppProject p in C.AppModel.Projects) comboBox1.Items.Add(p.Name);
+            comboBox1.SelectedItem = C.AppModel.SelectedProject.Name;
+            Console.WriteLine("Main Form content updated.");
         }
     }
 }
