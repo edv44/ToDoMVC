@@ -30,24 +30,26 @@
         {
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.completeTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.addTaskButton = new System.Windows.Forms.Button();
+            this.closeTaskButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(58, 21);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 0;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -57,14 +59,6 @@
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Project";
-            // 
-            // listView1
-            // 
-            this.listView1.Location = new System.Drawing.Point(15, 48);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(164, 265);
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // menuStrip1
             // 
@@ -81,8 +75,6 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addProjectToolStripMenuItem,
             this.removeProjectToolStripMenuItem,
-            this.addTaskToolStripMenuItem,
-            this.completeTaskToolStripMenuItem,
             this.closeToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -100,19 +92,7 @@
             this.removeProjectToolStripMenuItem.Name = "removeProjectToolStripMenuItem";
             this.removeProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.removeProjectToolStripMenuItem.Text = "Remove Project";
-            // 
-            // addTaskToolStripMenuItem
-            // 
-            this.addTaskToolStripMenuItem.Name = "addTaskToolStripMenuItem";
-            this.addTaskToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.addTaskToolStripMenuItem.Text = "Add Task";
-            this.addTaskToolStripMenuItem.Click += new System.EventHandler(this.addTaskToolStripMenuItem_Click);
-            // 
-            // completeTaskToolStripMenuItem
-            // 
-            this.completeTaskToolStripMenuItem.Name = "completeTaskToolStripMenuItem";
-            this.completeTaskToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.completeTaskToolStripMenuItem.Text = "Complete Task";
+            this.removeProjectToolStripMenuItem.Click += new System.EventHandler(this.removeProjectToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
@@ -121,16 +101,49 @@
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(15, 53);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(164, 225);
+            this.listBox1.TabIndex = 4;
+            // 
+            // addTaskButton
+            // 
+            this.addTaskButton.Location = new System.Drawing.Point(15, 285);
+            this.addTaskButton.Name = "addTaskButton";
+            this.addTaskButton.Size = new System.Drawing.Size(75, 34);
+            this.addTaskButton.TabIndex = 5;
+            this.addTaskButton.Text = "Add Task";
+            this.addTaskButton.UseVisualStyleBackColor = true;
+            this.addTaskButton.Click += new System.EventHandler(this.addTaskButton_Click);
+            // 
+            // closeTaskButton
+            // 
+            this.closeTaskButton.Location = new System.Drawing.Point(104, 285);
+            this.closeTaskButton.Name = "closeTaskButton";
+            this.closeTaskButton.Size = new System.Drawing.Size(75, 34);
+            this.closeTaskButton.TabIndex = 6;
+            this.closeTaskButton.Text = "Close Task";
+            this.closeTaskButton.UseVisualStyleBackColor = true;
+            this.closeTaskButton.Click += new System.EventHandler(this.closeTaskButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(195, 331);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.closeTaskButton);
+            this.Controls.Add(this.addTaskButton);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximumSize = new System.Drawing.Size(211, 369);
+            this.MinimumSize = new System.Drawing.Size(211, 369);
             this.Name = "MainForm";
             this.Text = "ToDoList";
             this.menuStrip1.ResumeLayout(false);
@@ -144,14 +157,14 @@
 
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addTaskToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem completeTaskToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button addTaskButton;
+        private System.Windows.Forms.Button closeTaskButton;
     }
 }
 

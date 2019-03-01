@@ -10,15 +10,21 @@ namespace ToDoList
     {
         public delegate void ChangeModel();
         public event ChangeModel ModelChanged;
-        public AppProject SelectedProject { get; set; }
+        public int SelectedProject { get; set; }
         public List<AppProject> Projects { get; set; }
 
         public Model()
         {
             AppProject FirstProject = new AppProject("First Project");
+            FirstProject.Tasks.Add(new AppTask("First Task"));
             this.Projects = new List<AppProject>();
             this.Projects.Add(FirstProject);
-            this.SelectedProject = this.Projects[0];
+            this.SelectedProject = 0;
+        }
+
+        public void OnModelChanged()
+        {
+            this.ModelChanged();
         }
     }
 }

@@ -18,7 +18,6 @@ namespace ToDoList
         {
             InitializeComponent();
             this.C = C;
-
         }
 
         private void AddProjectConfirm_Click(object sender, EventArgs e)

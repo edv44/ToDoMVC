@@ -14,10 +14,10 @@ namespace ToDoList
     {
         private Controller C { get; set; }
 
-        public MainForm(Controller C)
+        public MainForm()
         {
-            InitializeComponent();
-            this.C = C;
+            InitializeComponent(); ;
+            this.C = new Controller(new Model());
             C.AppModel.ModelChanged += this.UpdateContent;
             UpdateContent();
         }
@@ -28,11 +28,15 @@ namespace ToDoList
             form.ShowDialog();
         }
 
-        private void addTaskToolStripMenuItem_Click(object sender, EventArgs e)
+        private void removeProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddTaskForm form = new AddTaskForm(C);
-            C.AppModel.ModelChanged += form.Update;
-            form.ShowDialog();
+            if (C.AppModel.Projects.Count > 0)
+            {
+                RemoveProjectForm form = new RemoveProjectForm(C);
+                form.ShowDialog();
+            }
+            else MessageBox.Show("There are no projects.");
+
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -40,12 +44,48 @@ namespace ToDoList
             this.Close();
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            C.SelectProject(comboBox1.SelectedItem.ToString());
+
+        }
+
+        private void addTaskButton_Click(object sender, EventArgs e)
+        {
+            AddTaskForm form = new AddTaskForm(C);
+            form.ShowDialog();
+        }
+
+        private void closeTaskButton_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem != null) C.CloseTask(listBox1.SelectedIndex);
+        }
+
         private void UpdateContent()
         {
+            //clear main form
             comboBox1.Items.Clear();
-            foreach (AppProject p in C.AppModel.Projects) comboBox1.Items.Add(p.Name);
-            comboBox1.SelectedItem = C.AppModel.SelectedProject.Name;
-            Console.WriteLine("Main Form content updated.");
+            listBox1.Items.Clear();
+            comboBox1.SelectedItem = null;
+            addTaskButton.Enabled= false;
+            closeTaskButton.Enabled= false;
+
+            if (C.AppModel.Projects.Count > 0)
+            {
+                //fill project combo box
+                foreach (AppProject p in C.AppModel.Projects) comboBox1.Items.Add(p.Name);
+                comboBox1.SelectedItem = C.AppModel.Projects[C.AppModel.SelectedProject].Name;
+
+                //fill task list box
+                foreach (AppTask t in C.AppModel.Projects[C.AppModel.SelectedProject].Tasks)
+                {
+                    if (t.Done) listBox1.Items.Add("[Done] " + t.Name);
+                    else listBox1.Items.Add(t.Name);
+                }
+
+                addTaskButton.Enabled = true;
+                closeTaskButton.Enabled = true;
+            }
         }
     }
 }

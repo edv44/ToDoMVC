@@ -11,12 +11,9 @@ namespace ToDoList
         [STAThread]
         static void Main()
         {
-            Model M = new Model();
-            Controller C = new Controller(M);
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm(C));
+            Application.Run(new MainForm());
         }
     }
 }

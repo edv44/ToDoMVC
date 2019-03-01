@@ -31,7 +31,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.AddTaskButton = new System.Windows.Forms.Button();
             this.AddTaskCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -47,7 +46,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(61, 43);
+            this.textBox1.Location = new System.Drawing.Point(50, 32);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(121, 20);
             this.textBox1.TabIndex = 1;
@@ -55,24 +54,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 46);
+            this.label2.Location = new System.Drawing.Point(13, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Task";
             // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(61, 10);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 3;
-            // 
             // AddTaskButton
             // 
-            this.AddTaskButton.Location = new System.Drawing.Point(16, 69);
-            this.AddTaskButton.Name = "addTaskButton";
+            this.AddTaskButton.Location = new System.Drawing.Point(16, 58);
+            this.AddTaskButton.Name = "AddTaskButton";
             this.AddTaskButton.Size = new System.Drawing.Size(75, 23);
             this.AddTaskButton.TabIndex = 4;
             this.AddTaskButton.Text = "OK";
@@ -81,8 +72,8 @@
             // 
             // AddTaskCancel
             // 
-            this.AddTaskCancel.Location = new System.Drawing.Point(107, 69);
-            this.AddTaskCancel.Name = "addTaskCancelButton";
+            this.AddTaskCancel.Location = new System.Drawing.Point(97, 58);
+            this.AddTaskCancel.Name = "AddTaskCancel";
             this.AddTaskCancel.Size = new System.Drawing.Size(75, 23);
             this.AddTaskCancel.TabIndex = 5;
             this.AddTaskCancel.Text = "Cancel";
@@ -93,10 +84,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(204, 102);
+            this.ClientSize = new System.Drawing.Size(188, 89);
             this.Controls.Add(this.AddTaskCancel);
             this.Controls.Add(this.AddTaskButton);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
@@ -112,7 +102,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button AddTaskButton;
         private System.Windows.Forms.Button AddTaskCancel;
     }
