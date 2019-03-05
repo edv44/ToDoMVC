@@ -10,26 +10,29 @@ namespace MultiThread
     class Model
     {
         public Dictionary<Producer, Point> Producers { get; set; }
+        public int Size = 500; //square 500x500 px
 
-        public delegate void ModelChangeHandler(int id, bool limitX, bool limitY);
+        public delegate void ModelChangeHandler(int id, bool collideX, bool collideY);
         public event ModelChangeHandler ModelChangeEvent;
 
-        public void OnCollision(int id, bool limitX, bool limitY)
+        public void OnCollision(int id, bool collideX, bool collideY)
         {
-            this.ModelChangeEvent(id, limitX, limitY);
+            ModelChangeEvent(id, collideX, collideY);
         }
 
-        public void Move(int id, double dx, double dy)
+        public void Move(int id, int dx, int dy)
         {
-            //Producers[Producers.Keys.Where(p => p.ID == id)].X += dx;
-            //Producers[Producers.Keys.Where(p => p.ID == id)].Y += dy;
-
             foreach (Producer p in Producers.Keys)
             {
                 if (p.ID == id)
                 {
-                    //Producers[p].X += dx;
-                    //Producers[p].Y += dy;
+                    bool IsCollideX = Producers[p].X + dx >= Size ? true : false;
+                    bool IsCollideY = Producers[p].Y + dy >= Size ? true : false;
+
+                    if (IsCollideX || IsCollideY) OnCollision(id, IsCollideX, IsCollideY);
+                    else Producers[p] = new Point(Producers[p].X + dx, Producers[p].Y + dy);
+
+                    Console.WriteLine("Producer" + p.ID + " [" + Producers[p].X + " : " + Producers[p].Y + "]");
                 }
             }
         }

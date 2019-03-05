@@ -13,17 +13,17 @@ namespace MultiThread
         Model AppModel { get; set; }
         Thread Thread { get; set; }
         Random r = new Random();
-        double dx { get; set; }
-        double dy { get; set; }
+        int dx { get; set; }
+        int dy { get; set; }
 
         public Producer(Model model, int id)
         {
-            this.AppModel = model;
-            this.ID = id;
-            this.AppModel.Producers.Add(this, new System.Drawing.Point(r.Next(250), r.Next(250)));
-            this.Thread = new Thread(SendToModel);
-            dx = r.NextDouble();
-            dy = r.NextDouble();
+            AppModel = model;
+            ID = id;
+            AppModel.Producers.Add(this, new System.Drawing.Point(r.Next(AppModel.Size), r.Next(AppModel.Size)));
+            Thread = new Thread(SendToModel);
+            dx = r.Next(5);
+            dy = r.Next(5);
         }
 
         public void SendToModel()
