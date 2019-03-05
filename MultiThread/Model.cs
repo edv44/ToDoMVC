@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MultiThread
 {
-    class Model
+    public class Model
     {
         public Dictionary<Producer, Point> Producers { get; set; }
         public int Size = 500; //square 500x500 px
@@ -27,20 +27,6 @@ namespace MultiThread
 
         public void Move(int id, int dx, int dy)
         {
-            /*foreach (Producer p in Producers.Keys)
-            {
-                if (p.ID == id)
-                {
-                    bool IsCollideX = Producers[p].X + dx >= Size || Producers[p].X + dx <= 0 ? true : false;
-                    bool IsCollideY = Producers[p].Y + dy >= Size || Producers[p].Y + dy <= 0 ? true : false;
-
-                    if (IsCollideX || IsCollideY) OnCollision(id, IsCollideX, IsCollideY);
-                    else Producers[p] = new Point(Producers[p].X + dx, Producers[p].Y + dy);
-
-                    Console.WriteLine("Producer" + p.ID + " [" + Producers[p].X + " : " + Producers[p].Y + "]");
-                }
-            }*/
-
             for (int i = 0; i < Producers.Count; i++)
             {
                 if (Producers.ElementAt(i).Key.ID == id)

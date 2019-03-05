@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MultiThread
 {
-    class Producer
+    public class Producer
     {
         public int ID { get; set; }
         Model AppModel { get; set; }
@@ -31,6 +31,7 @@ namespace MultiThread
             while (true)
             {
                 this.AppModel.Move(this.ID, dx, dy);
+                Thread.Sleep(500); //throws exception on Thread.Interrupt()
             }
         }
 
@@ -45,14 +46,22 @@ namespace MultiThread
 
         public void Start()
         {
-            AppModel.ModelChangeEvent += ChangeDirection;
-            Thread.Start();
+            if (Thread.ThreadState.ToString() == "Unstarted")
+            {
+                AppModel.ModelChangeEvent += ChangeDirection;
+                Thread.Start();
+            }
         }
 
         public void Stop()
         {
-            AppModel.ModelChangeEvent -= ChangeDirection;
-            Thread.Interrupt();
+            try
+            {
+                //Thread.Abort();
+                Thread.Interrupt();
+                AppModel.ModelChangeEvent -= ChangeDirection;
+            }
+            catch (ThreadInterruptedException e) { Console.WriteLine(e); }
         }
     }
 }
