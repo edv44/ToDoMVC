@@ -16,7 +16,7 @@ namespace MultiThread
             Producer P2 = new Producer(MainModel, 2);
             //MainModel.Producers.Add(P1, new System.Drawing.Point(new Random().Next(MainModel.Size), new Random().Next(MainModel.Size)));
             //MainModel.Producers.Add(P2, new System.Drawing.Point(new Random().Next(MainModel.Size), new Random().Next(MainModel.Size)));
-            //P1.Start();
+            P1.Start();
             //P2.Start();
 
             Application.EnableVisualStyles();
