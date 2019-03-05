@@ -8,23 +8,14 @@ namespace ToDoList
 {
     public class Model
     {
-        public delegate void ChangeModel();
-        public event ChangeModel ModelChanged;
+        public delegate void ChangeModelHandler();
+        public event ChangeModelHandler ChangeModel;
         public int SelectedProject { get; set; }
         public List<AppProject> Projects { get; set; }
 
-        public Model()
+        public void OnChangeModel()
         {
-            AppProject FirstProject = new AppProject("First Project");
-            FirstProject.Tasks.Add(new AppTask("First Task"));
-            this.Projects = new List<AppProject>();
-            this.Projects.Add(FirstProject);
-            this.SelectedProject = 0;
-        }
-
-        public void OnModelChanged()
-        {
-            this.ModelChanged();
+            this.ChangeModel();
         }
     }
 }

@@ -12,26 +12,32 @@ namespace ToDoList
 
         public Controller(Model model)
         {
+            //init model
             this.AppModel = model;
+            AppProject FirstProject = new AppProject("First Project");
+            FirstProject.Tasks.Add(new AppTask("First Task"));
+            AppModel.Projects = new List<AppProject>();
+            AppModel.Projects.Add(FirstProject);
+            AppModel.SelectedProject = 0;
         }
 
         public void AddProject(string name)
         {
             this.AppModel.Projects.Add(new AppProject(name));
-            this.AppModel.OnModelChanged();
+            this.AppModel.OnChangeModel();
         }
 
         public void RemoveProject(AppProject project)
         {
             this.AppModel.Projects.Remove(project);
             if (AppModel.Projects.Count > 0) this.AppModel.SelectedProject = 0;
-            this.AppModel.OnModelChanged();
+            this.AppModel.OnChangeModel();
         }
 
         public void AddTask(string text)
         {
             this.AppModel.Projects[AppModel.SelectedProject].AddTask(text);
-            this.AppModel.OnModelChanged();
+            this.AppModel.OnChangeModel();
         }
 
         public void SelectProject(string selectedText)
@@ -42,7 +48,7 @@ namespace ToDoList
                 if (AppModel.Projects[i].Name == selectedText && i != this.AppModel.SelectedProject)
                 {
                     AppModel.SelectedProject = i;
-                    this.AppModel.OnModelChanged();
+                    this.AppModel.OnChangeModel();
                 }
             }
         }
@@ -50,7 +56,7 @@ namespace ToDoList
         public void CloseTask(int index)
         {
             this.AppModel.Projects[AppModel.SelectedProject].Tasks[index].Done = true;
-            this.AppModel.OnModelChanged();
+            this.AppModel.OnChangeModel();
         }
     }
 }

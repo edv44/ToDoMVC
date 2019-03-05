@@ -16,9 +16,9 @@ namespace ToDoList
 
         public MainForm()
         {
-            InitializeComponent(); ;
+            InitializeComponent();
             this.C = new Controller(new Model());
-            C.AppModel.ModelChanged += this.UpdateContent;
+            C.AppModel.ChangeModel += this.UpdateContent;
             UpdateContent();
         }
 
@@ -47,7 +47,6 @@ namespace ToDoList
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             C.SelectProject(comboBox1.SelectedItem.ToString());
-
         }
 
         private void addTaskButton_Click(object sender, EventArgs e)
