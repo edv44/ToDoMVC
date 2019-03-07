@@ -13,21 +13,39 @@ namespace MultiThread
     public partial class MainForm : Form
     {
         Model AppModel { get; set; }
+        SolidBrush sb;
+        Graphics g;
 
         public MainForm(Model model)
         {
             InitializeComponent();
             AppModel = model;
+
+            sb = new SolidBrush(Color.Black);
+            g = CreateGraphics();
+
+            model.DrawEvent += Draw;
         }
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            foreach (Producer p in AppModel.Producers.Keys) p.Start();
+            for (int i = 0; i < AppModel.Producers.Count; i++)
+            {
+                AppModel.Producers.ElementAt(i).Key.Start();
+            }
         }
 
         private void stopButton_Click(object sender, EventArgs e)
         {
-            foreach (Producer p in AppModel.Producers.Keys) p.Stop();
+            for(int i = 0; i < AppModel.Producers.Count; i++)
+            {
+                AppModel.Producers.ElementAt(i).Key.Stop();
+            }
+        }
+
+        public void Draw(int x, int y)
+        {
+            g.FillRectangle(sb, x, y, 3, 3);
         }
     }
 }

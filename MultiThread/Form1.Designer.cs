@@ -34,7 +34,7 @@
             // 
             // runButton
             // 
-            this.runButton.Location = new System.Drawing.Point(102, 52);
+            this.runButton.Location = new System.Drawing.Point(133, 527);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(75, 23);
             this.runButton.TabIndex = 0;
@@ -44,7 +44,7 @@
             // 
             // stopButton
             // 
-            this.stopButton.Location = new System.Drawing.Point(209, 51);
+            this.stopButton.Location = new System.Drawing.Point(267, 527);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(75, 23);
             this.stopButton.TabIndex = 1;
@@ -56,11 +56,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 462);
+            this.ClientSize = new System.Drawing.Size(504, 562);
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.runButton);
-            this.MaximumSize = new System.Drawing.Size(500, 500);
-            this.MinimumSize = new System.Drawing.Size(500, 500);
+            this.MaximumSize = new System.Drawing.Size(520, 600);
+            this.MinimumSize = new System.Drawing.Size(520, 600);
             this.Name = "MainForm";
             this.Text = "Main Form";
             this.ResumeLayout(false);

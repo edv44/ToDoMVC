@@ -19,25 +19,35 @@ namespace MultiThread
 
         public delegate void ModelChangeHandler(int id, bool collideX, bool collideY);
         public event ModelChangeHandler ModelChangeEvent;
+        public delegate void DrawHandler(int x, int y);
+        public event DrawHandler DrawEvent;
 
         public void OnCollision(int id, bool collideX, bool collideY)
         {
             ModelChangeEvent(id, collideX, collideY);
         }
 
+        public void OnDrawEvent(int x, int y)
+        {
+            DrawEvent(x, y);
+        }
+
         public void Move(int id, int dx, int dy)
         {
-            for (int i = 0; i < Producers.Count; i++)
+            lock (Producers)
             {
-                if (Producers.ElementAt(i).Key.ID == id)
+                for (int i = 0; i < Producers.Count; i++)
                 {
-                    bool IsCollideX = Producers.ElementAt(i).Value.X + dx >= Size || Producers.ElementAt(i).Value.X + dx <= 0 ? true : false;
-                    bool IsCollideY = Producers.ElementAt(i).Value.Y + dy >= Size || Producers.ElementAt(i).Value.Y + dy <= 0 ? true : false;
+                    if (Producers.ElementAt(i).Key.ID == id)
+                    {
+                        bool IsCollideX = Producers.ElementAt(i).Value.X + dx >= Size || Producers.ElementAt(i).Value.X + dx <= 0 ? true : false;
+                        bool IsCollideY = Producers.ElementAt(i).Value.Y + dy >= Size || Producers.ElementAt(i).Value.Y + dy <= 0 ? true : false;
 
-                    if (IsCollideX || IsCollideY) OnCollision(id, IsCollideX, IsCollideY);
-                    else Producers[Producers.ElementAt(i).Key] = new Point(Producers.ElementAt(i).Value.X + dx, Producers.ElementAt(i).Value.Y + dy);
-
-                    Console.WriteLine("Producer" + Producers.ElementAt(i).Key.ID + " [" + Producers.ElementAt(i).Value.X + " : " + Producers.ElementAt(i).Value.Y + "]");
+                        if (IsCollideX || IsCollideY) OnCollision(id, IsCollideX, IsCollideY);
+                        else Producers[Producers.ElementAt(i).Key] = new Point(Producers.ElementAt(i).Value.X + dx, Producers.ElementAt(i).Value.Y + dy);
+                        Console.WriteLine("Producer" + Producers.ElementAt(i).Key.ID + " [" + Producers.ElementAt(i).Value.X + " : " + Producers.ElementAt(i).Value.Y + "]");
+                        DrawEvent(Producers.ElementAt(i).Value.X, Producers.ElementAt(i).Value.Y);
+                    }
                 }
             }
         }

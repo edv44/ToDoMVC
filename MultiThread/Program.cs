@@ -13,7 +13,12 @@ namespace MultiThread
         {
             Model MainModel = new Model();
             Producer P1 = new Producer(MainModel, 1);
-            //Producer P2 = new Producer(MainModel, 2);
+            System.Threading.Thread.Sleep(50); //generates same coordinates without sleep
+            Producer P2 = new Producer(MainModel, 2);
+            System.Threading.Thread.Sleep(50); //generates same coordinates without sleep
+            Producer P3 = new Producer(MainModel, 3);
+            System.Threading.Thread.Sleep(50); //generates same coordinates without sleep
+            Producer P4 = new Producer(MainModel, 4);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -1,2 +1,3 @@
-# ToDoMVC2
-C# MVC Example
+# C# Test Project
+MVC pattern
+Multi Thread example
