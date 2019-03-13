@@ -29,18 +29,12 @@ namespace MultiThread
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < AppModel.Producers.Count; i++)
-            {
-                AppModel.Producers.ElementAt(i).Key.Start();
-            }
+            AppModel.Start();
         }
 
         private void stopButton_Click(object sender, EventArgs e)
         {
-            for(int i = 0; i < AppModel.Producers.Count; i++)
-            {
-                AppModel.Producers.ElementAt(i).Key.Stop();
-            }
+            AppModel.Stop();
         }
 
         public void Draw(int x, int y)
